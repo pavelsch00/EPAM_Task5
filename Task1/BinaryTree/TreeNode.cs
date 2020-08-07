@@ -5,7 +5,6 @@ namespace Task1.BinaryTree
 {
     public class TreeNode<T> : Node<T>, IComparable<T> where T : IComparable
     {
-
         public TreeNode(T t, TreeNode<T> parent, BinaryTree<T> tree) : base(t, parent)
         {
             Tree = tree;
@@ -15,47 +14,54 @@ namespace Task1.BinaryTree
 
         public void Balance()
         {
-            if (State == TreeState.RightHeavy)
+            switch (State)
             {
-                if (Right != null && (RightHeight - LeftHeight) < 0)
-                {
-                    LeftRightRotation();
-                }
-                else
-                {
-                    LeftRotation();
-                }
-            }
-            else if (State == TreeState.LeftHeavy)
-            {
-                if (Left != null && (RightHeight - LeftHeight) > 0)
-                {
-                    RightLeftRotation();
-                }
-                else
-                {
-                    RightRotation();
-                }
+                case BalanceState.LeftHeavy:
+                    if (Left != null && (RightHeight - LeftHeight) > 0)
+                    {
+                        LeftRotation();
+                        RightRotation();
+                    }
+                    else
+                    {
+                        RightRotation();
+                    }
+                    break;
+                case BalanceState.RightHeavy:
+                    if (Right != null && (RightHeight - LeftHeight) < 0)
+                    {
+                        RightRotation();
+                        LeftRotation();
+                    }
+                    else
+                    {
+                        LeftRotation();
+                    }
+                    break;
+                case BalanceState.Balanced:
+                    break;
+                default:
+                    break;
             }
         }
 
         public bool IsBalance() => LeftHeight - RightHeight == 0;
 
-        private TreeState State
+        private BalanceState State
         {
             get
             {
                 if (LeftHeight - RightHeight > 1)
                 {
-                    return TreeState.LeftHeavy;
+                    return BalanceState.LeftHeavy;
                 }
 
                 if (RightHeight - LeftHeight > 1)
                 {
-                    return TreeState.RightHeavy;
+                    return BalanceState.RightHeavy;
                 }
 
-                return TreeState.Balanced;
+                return BalanceState.Balanced;
             }
         }
 
@@ -77,18 +83,6 @@ namespace Task1.BinaryTree
             Left = newRoot.Right;
  
             newRoot.Right = this;
-        }
-
-        private void LeftRightRotation()
-        {
-            RightRotation();
-            LeftRotation();
-        }
-
-        private void RightLeftRotation()
-        {
-            LeftRotation();
-            RightRotation();
         }
 
         private void ReplaceRoot(Node<T> newRoot)

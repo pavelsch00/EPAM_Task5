@@ -6,27 +6,13 @@ namespace Task1.BinaryTree
 {
     public class BinaryTree<T> : IEnumerable<T> where T : IComparable
     {
-        public TreeNode<T> Root { get; set; }
+        public TreeNode<T> Root { private get; set; }
 
         public int CountElements { get; private set; }
 
-        public void Add(T collection)
-        {   
-            if (Root == null)
-            {
-                Root = new TreeNode<T>(collection, null, this);
-            }
-            else
-            {
-                RecursiveAddition(Root, collection);
-            }
-
-            CountElements++;
-        }
-
         private void RecursiveAddition(TreeNode<T> node, T collection)
         {
-            if (collection.CompareTo(node.Value) < 0)
+            if (collection.CompareTo(node.Content) < 0)
             {
                 if (node.Left == null)
                 {
@@ -50,8 +36,6 @@ namespace Task1.BinaryTree
             }
         }
 
-        public bool IsContains(T collection) => Find(collection) != null;
-
         private TreeNode<T> Find(T collection)
         {
             TreeNode<T> treeNode = Root; 
@@ -73,8 +57,65 @@ namespace Task1.BinaryTree
                     break;
                 }
             }
+
             return treeNode;
         }
+
+        private IEnumerator<T> TreeTraversal()
+        {
+            if (Root != null)
+            {
+                Stack<TreeNode<T>> stack = new Stack<TreeNode<T>>();
+                TreeNode<T> treeNode = Root;
+
+                bool goLeftNext = true;
+
+                stack.Push(treeNode);
+
+                while (stack.Count > 0)
+                {
+                    if (goLeftNext)
+                    {
+                        while (treeNode.Left != null)
+                        {
+                            stack.Push(treeNode);
+                            treeNode = treeNode.Left as TreeNode<T>;
+                        }
+                    }
+
+                    yield return treeNode.Content;
+
+                    if (treeNode.Right != null)
+                    {
+                        treeNode = treeNode.Right as TreeNode<T>;
+
+                        goLeftNext = true;
+                    }
+                    else
+                    {
+                        treeNode = stack.Pop();
+                        goLeftNext = false;
+                    }
+                }
+            }
+        }
+
+        public bool IsContains(T collection) => Find(collection) != null;
+
+        public void Add(T collection)
+        {
+            if (Root == null)
+            {
+                Root = new TreeNode<T>(collection, null, this);
+            }
+            else
+            {
+                RecursiveAddition(Root, collection);
+            }
+
+            CountElements++;
+        }
+
 
         public bool Remove(T collection)
         {
@@ -103,7 +144,7 @@ namespace Task1.BinaryTree
                 }
                 else
                 {
-                    int result = treeNode.Parent.CompareTo(treeNode.Value);
+                    int result = treeNode.Parent.CompareTo(treeNode.Content);
 
                     if (result > 0)
                     {
@@ -130,7 +171,7 @@ namespace Task1.BinaryTree
                 }
                 else
                 {
-                    int result = treeNode.Parent.CompareTo(treeNode.Value);
+                    int result = treeNode.Parent.CompareTo(treeNode.Content);
                     if (result > 0)
                     {
                         treeNode.Parent.Left = treeNode.Right;
@@ -167,7 +208,7 @@ namespace Task1.BinaryTree
                 }
                 else
                 {
-                    int result = treeNode.Parent.CompareTo(treeNode.Value);
+                    int result = treeNode.Parent.CompareTo(treeNode.Content);
 
                     if (result > 0)
                     {
@@ -201,46 +242,7 @@ namespace Task1.BinaryTree
             CountElements = 0;
         }
 
-        public IEnumerator<T> InOrderTraversal()
-        {
-            if (Root != null)
-            {
-                Stack<TreeNode<T>> stack = new Stack<TreeNode<T>>();
-                TreeNode<T> treeNode = Root;
-
-                bool goLeftNext = true;
-
-                stack.Push(treeNode);
-
-                while (stack.Count > 0)
-                {
-                    if (goLeftNext)
-                    {
-                        while (treeNode.Left != null)
-                        {
-                            stack.Push(treeNode);
-                            treeNode = treeNode.Left as TreeNode<T>;
-                        }
-                    }
-
-                    yield return treeNode.Value;
-
-                    if (treeNode.Right != null)
-                    {
-                        treeNode = treeNode.Right as TreeNode<T>;
-
-                        goLeftNext = true;
-                    }
-                    else
-                    {
-                        treeNode = stack.Pop();
-                        goLeftNext = false;
-                    }
-                }
-            }
-        }
-
-        public IEnumerator<T> GetEnumerator() => InOrderTraversal();
+        public IEnumerator<T> GetEnumerator() => TreeTraversal();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }

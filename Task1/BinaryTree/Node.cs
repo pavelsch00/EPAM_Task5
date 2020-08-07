@@ -9,11 +9,11 @@ namespace Task1.BinaryTree
 
         public Node(T value, Node<T> parent)
         {
-            Value = value;
+            Content = value;
             Parent = parent;
         }
 
-        public T Value { get; private set; }
+        public T Content { get; private set; }
 
         public Node<T> Parent { get; set; }
 
@@ -61,6 +61,6 @@ namespace Task1.BinaryTree
             return 0;
         }
 
-        public int CompareTo(T other) => Value.CompareTo(other);
+        public int CompareTo(T other) => Content.CompareTo(other);
     }
 }

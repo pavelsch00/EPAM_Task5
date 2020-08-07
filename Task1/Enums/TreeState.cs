@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Task1.Enums
 {
-    enum TreeState
+    enum BalanceState
     {
         Balanced,
         LeftHeavy,
