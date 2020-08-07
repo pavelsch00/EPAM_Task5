@@ -1,65 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Collections;
 
 namespace Task1.BinaryTree
 {
     public class BinaryTree<T> : IEnumerable<T> where T : IComparable
     {
-        public TreeNode<T> Head { get; set; }
+        public TreeNode<T> Root { get; set; }
 
-        public int Count { get; private set; }
+        public int CountElements { get; private set; }
 
-        public void Add(T value)
+        public void Add(T collection)
         {   
-            if (Head == null)
+            if (Root == null)
             {
-                Head = new TreeNode<T>(value, null, this);
+                Root = new TreeNode<T>(collection, null, this);
             }
             else
             {
-                AddTo(Head, value);
+                RecursiveAddition(Root, collection);
             }
 
-            Count++;
+            CountElements++;
         }
 
-        private void AddTo(TreeNode<T> node, T value)
+        private void RecursiveAddition(TreeNode<T> node, T collection)
         {
-            if (value.CompareTo(node.Value) < 0)
+            if (collection.CompareTo(node.Value) < 0)
             {
                 if (node.Left == null)
                 {
-                    node.Left = new TreeNode<T>(value, node, this);
+                    node.Left = new TreeNode<T>(collection, node, this);
                 }
                 else
                 {
-                    AddTo(node.Left as TreeNode<T>, value);
+                    RecursiveAddition(node.Left as TreeNode<T>, collection);
                 }
             }
             else
             {      
                 if (node.Right == null)
                 {
-                    node.Right = new TreeNode<T>(value, node, this);
+                    node.Right = new TreeNode<T>(collection, node, this);
                 }
                 else
                 {         
-                    AddTo(node.Right as TreeNode<T>, value);
+                    RecursiveAddition(node.Right as TreeNode<T>, collection);
                 }
             }
         }
 
-        public bool IsContains(T value) => Find(value) != null;
+        public bool IsContains(T collection) => Find(collection) != null;
 
-        private TreeNode<T> Find(T value)
+        private TreeNode<T> Find(T collection)
         {
-            TreeNode<T> treeNode = Head; 
+            TreeNode<T> treeNode = Root; 
 
             while (treeNode != null)
             {
-                int result = treeNode.CompareTo(value);
+                int result = treeNode.CompareTo(collection);
 
                 if (result > 0)
                 {
@@ -77,10 +76,10 @@ namespace Task1.BinaryTree
             return treeNode;
         }
 
-        public bool Remove(T value)
+        public bool Remove(T collection)
         {
             TreeNode<T> treeNode;
-            treeNode = Find(value);
+            treeNode = Find(collection);
 
             if (treeNode == null)
             {
@@ -89,17 +88,17 @@ namespace Task1.BinaryTree
 
             TreeNode<T> treeToBalance = treeNode.Parent as TreeNode<T>;
 
-            Count--;
+            CountElements--;
 
             if (treeNode.Right == null)
             {
                 if (treeNode.Parent == null)
                 {
-                    Head = treeNode.Left as TreeNode<T>;
+                    Root = treeNode.Left as TreeNode<T>;
 
-                    if (Head != null)
+                    if (Root != null)
                     {
-                        Head.Parent = null;
+                        Root.Parent = null;
                     }
                 }
                 else
@@ -122,11 +121,11 @@ namespace Task1.BinaryTree
 
                 if (treeNode.Parent == null)
                 {
-                    Head = treeNode.Right as TreeNode<T>;
+                    Root = treeNode.Right as TreeNode<T>;
 
-                    if (Head != null)
+                    if (Root != null)
                     {
-                        Head.Parent = null;
+                        Root.Parent = null;
                     }
                 }
                 else
@@ -159,11 +158,11 @@ namespace Task1.BinaryTree
 
                 if (treeNode.Parent == null)
                 {
-                    Head = leftmost;
+                    Root = leftmost;
 
-                    if (Head != null)
+                    if (Root != null)
                     {
-                        Head.Parent = null;
+                        Root.Parent = null;
                     }
                 }
                 else
@@ -187,9 +186,9 @@ namespace Task1.BinaryTree
             }
             else
             {
-                if (Head != null)
+                if (Root != null)
                 {
-                    Head.Balance();
+                    Root.Balance();
                 }
             }
 
@@ -198,16 +197,16 @@ namespace Task1.BinaryTree
 
         public void Clear()
         {
-            Head = null;
-            Count = 0;
+            Root = null;
+            CountElements = 0;
         }
 
         public IEnumerator<T> InOrderTraversal()
         {
-            if (Head != null)
+            if (Root != null)
             {
                 Stack<TreeNode<T>> stack = new Stack<TreeNode<T>>();
-                TreeNode<T> treeNode = Head;
+                TreeNode<T> treeNode = Root;
 
                 bool goLeftNext = true;
 

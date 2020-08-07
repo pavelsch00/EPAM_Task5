@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Task1.BinaryTree
 {
@@ -48,8 +46,6 @@ namespace Task1.BinaryTree
                 }
             }
         }
-
-        public int BalanceFactor { get => RightHeight - LeftHeight; }
 
         public int LeftHeight { get => MaxChildHeight(Right); }
 

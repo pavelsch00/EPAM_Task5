@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Task1.Enums;
 
 namespace Task1.BinaryTree
 {
-    public partial class TreeNode<T> : Node<T>, IComparable<T> where T : IComparable
+    public class TreeNode<T> : Node<T>, IComparable<T> where T : IComparable
     {
 
         public TreeNode(T t, TreeNode<T> parent, BinaryTree<T> tree) : base(t, parent)
@@ -19,7 +17,7 @@ namespace Task1.BinaryTree
         {
             if (State == TreeState.RightHeavy)
             {
-                if (Right != null && BalanceFactor < 0)
+                if (Right != null && (RightHeight - LeftHeight) < 0)
                 {
                     LeftRightRotation();
                 }
@@ -30,7 +28,7 @@ namespace Task1.BinaryTree
             }
             else if (State == TreeState.LeftHeavy)
             {
-                if (Left != null && BalanceFactor > 0)
+                if (Left != null && (RightHeight - LeftHeight) > 0)
                 {
                     RightLeftRotation();
                 }
@@ -108,7 +106,7 @@ namespace Task1.BinaryTree
             }
             else
             {
-                Tree.Head = newRoot
+                Tree.Root = newRoot
                     as TreeNode<T>;
             }
 
