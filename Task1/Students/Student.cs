@@ -1,8 +1,9 @@
 ﻿using System;
+using Task1.Students.Interfaces;
 
-namespace Task1
+namespace Task1.Students
 {
-    public class Student : IComparable
+    public class Student : IStudent, IComparable
     {
         private int assessment;
 

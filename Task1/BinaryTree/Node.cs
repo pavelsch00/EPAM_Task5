@@ -1,11 +1,12 @@
 ﻿using System;
+using Task1.BinaryTree.Interfaces;
 
 namespace Task1.BinaryTree
 {
-    public class Node<T> : IComparable<T> where T : IComparable
+    public class Node<T> : INode<T>, IComparable<T> where T : IComparable
     {
-        Node<T> _left;
-        Node<T> _right;
+        private Node<T> _left;
+        private Node<T> _right;
 
         public Node(T value, Node<T> parent)
         {

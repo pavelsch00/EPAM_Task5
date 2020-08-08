@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
-using Task1;
+using Task1.BinaryTree.Interfaces;
 
 namespace Task1.BinaryTree
 {
-    public class BinaryTree<T> : IEnumerable<T> where T : IComparable
+    public class BinaryTree<T> : IBinaryTree<T>, IEnumerable<T> where T : IComparable
     {
         public TreeNode<T> Root { private get; set; }
 
