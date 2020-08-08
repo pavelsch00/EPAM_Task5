@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
+using Task1;
 
 namespace Task1.BinaryTree
 {
@@ -61,7 +62,7 @@ namespace Task1.BinaryTree
             return treeNode;
         }
 
-        private IEnumerator<T> TreeTraversal()
+        public IEnumerator<T> TreeTraversal()
         {
             if (Root != null)
             {
@@ -115,7 +116,6 @@ namespace Task1.BinaryTree
 
             CountElements++;
         }
-
 
         public bool Remove(T collection)
         {
@@ -240,6 +240,34 @@ namespace Task1.BinaryTree
         {
             Root = null;
             CountElements = 0;
+        }
+
+        public void SaveToXmlFile(string path)
+        {
+            var collection = new List<T>();
+            IEnumerator item = Root.Tree.GetEnumerator();
+
+            while (item.MoveNext())
+            {
+                collection.Add((T)item.Current);
+            }
+
+            XmlFileExtension<T>.SaveToFile(path, collection);
+        }
+
+        public void GetFromXmlFile(string path)
+        {
+            try
+            {
+                foreach (var item in XmlFileExtension<T>.GetFromFile(path))
+                {
+                    Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("The argument does not match the T collection");
+            }
         }
 
         public IEnumerator<T> GetEnumerator() => TreeTraversal();

@@ -6,6 +6,10 @@ namespace Task1
     {
         private int assessment;
 
+        public Student()
+        {
+        }
+
         public Student(string name, string testName, string testDate, int assessment)
         {
             Name = name;
