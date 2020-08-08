@@ -7,12 +7,26 @@ using System.Text;
 
 namespace Task1.BinaryTree
 {
+    /// <summary>
+    /// Class describes the BinaryTree.
+    /// </summary>
     public class BinaryTree<T> : IBinaryTree<T>, IEnumerable<T> where T : IComparable
     {
+        /// <summary>
+        /// The property stores information about the root of the tree.
+        /// </summary>
         public TreeNode<T> Root { private get; set; }
 
+        /// <summary>
+        /// The property stores information about the number of elements in the tree.
+        /// </summary>
         public int CountElements { get; private set; }
 
+        /// <summary>
+        /// Recursively adding objects to the tree.
+        /// </summary>
+        /// <param name="node">Node of tree<T></param>
+        /// <param name="collection">Collection of objects<T></param>
         private void RecursiveAddition(TreeNode<T> node, T collection)
         {
             if (collection.CompareTo(node.Content) < 0)
@@ -39,6 +53,11 @@ namespace Task1.BinaryTree
             }
         }
 
+        /// <summary>
+        /// The method searches for an element in the tree.
+        /// </summary>
+        /// <param name="collection">Collection of objects<T></param>
+        /// <returns>Node of tree.</returns>
         private TreeNode<T> Find(T collection)
         {
             TreeNode<T> treeNode = Root; 
@@ -64,6 +83,10 @@ namespace Task1.BinaryTree
             return treeNode;
         }
 
+        /// <summary>
+        /// The method implements an iterator using recursive movement through the tree.
+        /// </summary>
+        /// <returns>Collection of objects<T>.</returns>
         public IEnumerator<T> TreeTraversal()
         {
             if (Root != null)
@@ -103,8 +126,17 @@ namespace Task1.BinaryTree
             }
         }
 
+        /// <summary>
+        /// The method сhecks if there is an item in the collection.
+        /// </summary>
+        /// <param name="collection">Collection of objects<T></param>
+        /// <returns>Tru if contains or false if not</returns>
         public bool IsContains(T collection) => Find(collection) != null;
 
+        /// <summary>
+        /// The method adds a collection of objects to the tree.
+        /// </summary>
+        /// <param name="collection">Collection of objects<T></param>
         public void Add(T collection)
         {
             if (Root == null)
@@ -119,6 +151,11 @@ namespace Task1.BinaryTree
             CountElements++;
         }
 
+        /// <summary>
+        /// Method removes an element from the tree.
+        /// </summary>
+        /// <param name="collection">Collection of objects<T></param>
+        /// <returns>True if deletion happened, false if not.</returns>
         public bool Remove(T collection)
         {
             TreeNode<T> treeNode;
@@ -238,12 +275,18 @@ namespace Task1.BinaryTree
             return true;
         }
 
+        /// <summary>
+        /// The method removes all objects from the tree.
+        /// </summary>
         public void Clear()
         {
             Root = null;
             CountElements = 0;
         }
 
+        /// <summary>
+        /// Method saves objects to xml file.
+        /// </summary>
         public void SaveToXmlFile(string path)
         {
             var collection = new List<T>();
@@ -257,6 +300,9 @@ namespace Task1.BinaryTree
             XmlFileExtension<T>.SaveToFile(path, collection);
         }
 
+        /// <summary>
+        /// Method get objects from xml file.
+        /// </summary>
         public void GetFromXmlFile(string path)
         {
             try
@@ -272,10 +318,23 @@ namespace Task1.BinaryTree
             }
         }
 
+        /// <summary>
+        /// The method implements the interface IEnumerable.
+        /// </summary>
+        /// <returns>IEnumerator<T>.</returns>
         public IEnumerator<T> GetEnumerator() => TreeTraversal();
 
+        /// <summary>
+        /// The method implements the interface IEnumerable.
+        /// </summary>
+        /// <returns>IEnumerator<T>.</returns>
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+        /// <summary>
+        /// Method equals two objects.
+        /// </summary>
+        /// <param name="obj">Equals object.</param>
+        /// <returns>Returns the result of the comparison.</returns>
         public override bool Equals(object obj)
         {
             if (obj.GetType() != GetType())
@@ -303,6 +362,10 @@ namespace Task1.BinaryTree
             return true;
         }
 
+        /// <summary>
+        /// The method gets the hash code of the object.
+        /// </summary>
+        /// <returns>Returns the hash code of the object.</returns>
         public override int GetHashCode()
         {
             IEnumerator item = Root.Tree.GetEnumerator();
@@ -316,6 +379,10 @@ namespace Task1.BinaryTree
             return hashCode;
         }
 
+        /// <summary>
+        /// The method returns information about the object in string form.
+        /// </summary>
+        /// <returns>Information about the object.</returns>
         public override string ToString()
         {
             IEnumerator item = Root.Tree.GetEnumerator();

@@ -8,6 +8,9 @@ namespace Task1.Students
     /// </summary>
     public class Student : IStudent, IComparable
     {
+        /// <summary>
+        /// The field stores the test assessment.
+        /// </summary>
         private int assessment;
 
         /// <summary>

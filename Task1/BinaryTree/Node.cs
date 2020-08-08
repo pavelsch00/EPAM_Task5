@@ -3,55 +3,93 @@ using Task1.BinaryTree.Interfaces;
 
 namespace Task1.BinaryTree
 {
+    /// <summary>
+    /// Class describes the Node.
+    /// </summary>
     public class Node<T> : INode<T>, IComparable<T> where T : IComparable
     {
-        private Node<T> _left;
-        private Node<T> _right;
+        /// <summary>
+        /// The field stores information about the left child.
+        /// </summary>
+        private Node<T> left;
 
-        public Node(T value, Node<T> parent)
+        /// <summary>
+        /// The field stores information about the right child.
+        /// </summary>
+        private Node<T> right;
+
+        /// <summary>
+        /// The constructor initializes the class object.
+        /// </summary>
+        /// <param name="content">Сontent of the object.</param>
+        /// <param name="parent">Parent.</param>
+        public Node(T content, Node<T> parent)
         {
-            Content = value;
+            Content = content;
             Parent = parent;
         }
 
+        /// <summary>
+        /// The property describes the content of the object.
+        /// </summary>
         public T Content { get; private set; }
 
+        /// <summary>
+        /// The property stores the parent node.
+        /// </summary>
         public Node<T> Parent { get; set; }
 
+        /// <summary>
+        /// The property stores the right node.
+        /// </summary>
         public Node<T> Left
         {
-            get => _left;
+            get => left;
 
             set
             {
-                _left = value;
+                left = value;
 
-                if (_left != null)
+                if (left != null)
                 {
-                    _left.Parent = this;
+                    left.Parent = this;
                 }
             }
         }
 
+        /// <summary>
+        /// The property stores the right node.
+        /// </summary>
         public Node<T> Right
         {
-            get => _right;
+            get => right;
 
             set
             {
-                _right = value;
+                right = value;
 
-                if (_right != null)
+                if (right != null)
                 {
-                    _right.Parent = this;
+                    right.Parent = this;
                 }
             }
         }
 
+        /// <summary>
+        /// The property stores length of left node.
+        /// </summary>
         public int LeftHeight { get => MaxChildHeight(Right); }
 
+        /// <summary>
+        /// The property stores length of right node.
+        /// </summary>
         public int RightHeight { get => MaxChildHeight(Right); }
 
+        /// <summary>
+        /// The method finds the maximum length of the child.
+        /// </summary>
+        /// <param name="node">Node.</param>
+        /// <returns>Returns the result of the comparison.</returns>
         public int MaxChildHeight(Node<T> node)
         {
             if (node != null)
@@ -62,8 +100,17 @@ namespace Task1.BinaryTree
             return 0;
         }
 
+        /// <summary>
+        /// The method implements the ComparTo interface for comparing objects.
+        /// </summary>
+        /// <returns>Returns the result of the comparison.</returns>
         public int CompareTo(T other) => Content.CompareTo(other);
 
+        /// <summary>
+        /// Method equals two objects.
+        /// </summary>
+        /// <param name="obj">Equals object.</param>
+        /// <returns>Returns the result of the comparison.</returns>
         public override bool Equals(object obj)
         {
             if (obj.GetType() != GetType())
@@ -77,8 +124,16 @@ namespace Task1.BinaryTree
                    RightHeight == node.RightHeight;
         }
 
+        /// <summary>
+        /// The method gets the hash code of the object.
+        /// </summary>
+        /// <returns>Returns the hash code of the object.</returns>
         public override int GetHashCode() => HashCode.Combine(Content, Left.Content, Right.Content, LeftHeight, RightHeight);
 
+        /// <summary>
+        /// The method returns information about the object in string form.
+        /// </summary>
+        /// <returns>Information about the object.</returns>
         public override string ToString() => Content.ToString();
     }
 }
