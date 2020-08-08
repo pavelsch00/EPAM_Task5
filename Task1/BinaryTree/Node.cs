@@ -63,5 +63,22 @@ namespace Task1.BinaryTree
         }
 
         public int CompareTo(T other) => Content.CompareTo(other);
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != GetType())
+                return false;
+
+            Node<T> node = (Node<T>)obj;
+
+            return Left.Content is IComparable == node.Left.Content is IComparable &&
+                   Right.Content is IComparable == node.Right.Content is IComparable &&
+                   LeftHeight == node.LeftHeight &&
+                   RightHeight == node.RightHeight;
+        }
+
+        public override int GetHashCode() => HashCode.Combine(Content, Left.Content, Right.Content, LeftHeight, RightHeight);
+
+        public override string ToString() => Content.ToString();
     }
 }

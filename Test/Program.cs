@@ -20,15 +20,30 @@ namespace Test
             binaryTree.Add(new Student("Taras", "TViMS", "18.02.2020", 1));
             binaryTree.Add(new Student("Daniil", "MMA", "18.02.2020", 0));
 
-            binaryTree.Remove(new Student("Michail", "TViMS", "18.02.2020", 7));
-            
+            var binaryTree1 = new BinaryTree<Student>();
+
+            binaryTree1.Add(new Student("Pavel", "MMA", "18.02.2020", 10));
+            binaryTree1.Add(new Student("Maxim", "TViMS", "18.02.2020", 2));
+            binaryTree1.Add(new Student("Rita", "MMA", "18.02.2020", 3));
+            binaryTree1.Add(new Student("Sasha", "TViMS", "18.02.2020", 5));
+            binaryTree1.Add(new Student("Tolik", "MMA", "18.02.2020", 8));
+            binaryTree1.Add(new Student("Michail", "TViMS", "18.02.2020", 5));
+            binaryTree1.Add(new Student("Stephan", "MMA", "18.02.2020", 4));
+            binaryTree1.Add(new Student("Taras", "TViMS", "18.02.2020", 1));
+            binaryTree1.Add(new Student("Daniil", "MMA", "18.02.2020", 0));
 
             // binaryTree.GetFromXmlFile(@"..\..\..\MyFile.xml");
 
+            Console.WriteLine(binaryTree.Equals(binaryTree1));
+
+            Console.WriteLine(binaryTree.GetHashCode() == binaryTree1.GetHashCode());
+
+            Console.WriteLine(binaryTree);
+            /*
             foreach (var item in binaryTree)
             {
                 Console.WriteLine(item);
-            }
+            }*/
 
             // binaryTree.SaveToXmlFile(@"..\..\..\MyFile.xml");
             

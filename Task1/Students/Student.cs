@@ -33,7 +33,7 @@ namespace Task1.Students
                 if (value >= 0 && value <= 10)
                     assessment = value;
                 else
-                    throw new ArgumentException("Invalid assessment");
+                    throw new ArgumentException("Invalid assessment.");
             }
         }
 
@@ -42,6 +42,21 @@ namespace Task1.Students
            Student student = (Student)obj;
            return Assessment.CompareTo(student.Assessment);
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != GetType())
+                return false;
+
+            Student student = (Student)obj;
+
+            return Name == student.Name &&
+                   TestName == student.TestName &&
+                   TestDate == student.TestDate &&
+                   Assessment == student.Assessment;
+        }
+
+        public override int GetHashCode() => HashCode.Combine(Name, TestName, TestDate, Assessment);
 
         public override string ToString() => $"Name: {Name}, Test Name: {TestName}, TestDate: {TestDate}, Assessment: {Assessment}\n";
     }

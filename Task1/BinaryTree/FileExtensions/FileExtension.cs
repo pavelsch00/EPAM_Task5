@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace Task1
+namespace Task1.BinaryTree.FileExtensions
 {
     public static class XmlFileExtension<T>
     {
@@ -17,7 +17,7 @@ namespace Task1
             }
             catch (Exception)
             {
-                throw new ArgumentException("Failed to serialize collection");
+                throw new ArgumentException("Failed to serialize collection.");
             }
         }
 

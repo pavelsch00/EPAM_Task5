@@ -108,5 +108,25 @@ namespace Task1.BinaryTree
         }
 
         public bool IsBalance() => LeftHeight - RightHeight == 0;
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != GetType())
+                return false;
+
+            var treeNode = (TreeNode<T>)obj;
+
+            Tree.Equals(treeNode);
+
+            return Tree.Equals(treeNode) &&
+                   State == treeNode.State;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(base.GetHashCode(), Tree.GetHashCode(), State);
+        }
+
+        public override string ToString() => Tree.ToString();
     }
 }

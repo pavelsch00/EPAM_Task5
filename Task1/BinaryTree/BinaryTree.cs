@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections;
 using Task1.BinaryTree.Interfaces;
+using Task1.BinaryTree.FileExtensions;
+using System.Text;
 
 namespace Task1.BinaryTree
 {
@@ -273,5 +275,58 @@ namespace Task1.BinaryTree
         public IEnumerator<T> GetEnumerator() => TreeTraversal();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != GetType())
+                return false;
+
+            BinaryTree<T> binaryTree = (BinaryTree<T>)obj;
+
+            IEnumerator thisItem = Root.Tree.GetEnumerator();
+
+            IEnumerator item = binaryTree.Root.Tree.GetEnumerator();
+
+            if (CountElements != binaryTree.CountElements)
+            {
+                return false;
+            }
+
+            while (item.MoveNext() && thisItem.MoveNext())
+            {
+                if ((T)item.Current is IComparable != (T)thisItem.Current is IComparable)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            IEnumerator item = Root.Tree.GetEnumerator();
+            int hashCode = 0;
+
+            while (item.MoveNext())
+            {
+                hashCode += item.Current.GetHashCode() * CountElements;
+            }
+
+            return hashCode;
+        }
+
+        public override string ToString()
+        {
+            IEnumerator item = Root.Tree.GetEnumerator();
+            var sb = new StringBuilder();
+
+            while (item.MoveNext())
+            {
+                sb.Append(item.Current.ToString());
+            }
+
+            return sb.ToString();
+        }
     }
 }
