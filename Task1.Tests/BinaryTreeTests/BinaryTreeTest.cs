@@ -135,8 +135,8 @@ namespace Task1.Tests
         /// <param name="path">File path.</param>
         /// <param name="areEquale">Turns the case on or off.</param>
         [Theory]
-        [InlineData(@"..\..\..\Test1.xml", true)]
-        [InlineData(@"..\..\..\Test2.xml", false)]
+        [InlineData(@"..\..\..\BinaryTreeTests\Resources\Test1.xml", true)]
+        [InlineData(@"..\..\..\BinaryTreeTests\Resources\Test2.xml", false)]
         public void GetFromXmlFile(string path, bool areEquale)
         {
             // arrange
@@ -170,7 +170,7 @@ namespace Task1.Tests
         /// </summary>
         /// <param name="path">File path.</param>
         [Theory]
-        [InlineData(@"..\..\..\Test3.xml")]
+        [InlineData(@"..\..\..\BinaryTreeTests\Resources\Test3.xml")]
         public void SaveToXmlFile(string path)
         {
             // arrange
