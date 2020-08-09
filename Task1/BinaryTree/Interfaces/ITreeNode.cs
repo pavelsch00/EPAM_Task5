@@ -16,11 +16,5 @@ namespace Task1.BinaryTree.Interfaces
         /// The method balances the tree.
         /// </summary>
         public void Balance();
-
-        /// <summary>
-        /// Method checks if the tree is balanced.
-        /// </summary>
-        /// <returns>True if balanced false if not</returns>
-        public bool IsBalance();
     }
 }

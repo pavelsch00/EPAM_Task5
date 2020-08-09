@@ -15,7 +15,7 @@ namespace Task1.BinaryTree
         /// <summary>
         /// The property stores information about the root of the tree.
         /// </summary>
-        public TreeNode<T> Root { private get; set; }
+        public TreeNode<T> Root { get; set; }
 
         /// <summary>
         /// The property stores information about the number of elements in the tree.

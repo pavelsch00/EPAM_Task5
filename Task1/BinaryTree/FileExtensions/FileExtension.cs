@@ -11,7 +11,7 @@ namespace Task1.BinaryTree.FileExtensions
         {
             try
             {
-                using var fs = new FileStream(path, FileMode.Create);
+                using var fs = new FileStream(path, FileMode.OpenOrCreate);
                 var formatter = new XmlSerializer(typeof(List<T>));
                 formatter.Serialize(fs, collection);
             }

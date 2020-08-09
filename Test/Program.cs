@@ -32,11 +32,8 @@ namespace Test
             binaryTree1.Add(new Student("Taras", "TViMS", "18.02.2020", 1));
             binaryTree1.Add(new Student("Daniil", "MMA", "18.02.2020", 0));
 
-            // binaryTree.GetFromXmlFile(@"..\..\..\MyFile.xml");
+            binaryTree.SaveToXmlFile(@"..\..\..\MyFile3.xml");
 
-            Console.WriteLine(binaryTree.Equals(binaryTree1));
-
-            Console.WriteLine(binaryTree.GetHashCode() == binaryTree1.GetHashCode());
 
             Console.WriteLine(binaryTree);
             /*
