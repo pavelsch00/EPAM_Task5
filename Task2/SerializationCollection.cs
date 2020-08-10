@@ -35,8 +35,7 @@ namespace Task2
         public void GetFromXmlFile(string path) => Collection = FileExtension<T>.GetFromFile(path);
 
         public void SaveToBinaryFilelFile(string path)
-        {
-        }
+        {}
 
         public void SaveToJsonile(string path)
         {}
