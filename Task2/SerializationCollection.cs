@@ -39,8 +39,7 @@ namespace Task2
         }
 
         public void SaveToJsonile(string path)
-        {
-        }
+        {}
 
         public IEnumerator<T> GetEnumerator()
         {
