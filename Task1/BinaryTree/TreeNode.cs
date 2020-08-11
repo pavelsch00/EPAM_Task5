@@ -33,12 +33,12 @@ namespace Task1.BinaryTree
         {
             get
             {
-                if (LeftHeight - RightHeight > 1)
+                if (LeftHeight - RightHeight > 0)
                 {
                     return BalanceState.LeftHeavy;
                 }
 
-                if (RightHeight - LeftHeight > 1)
+                if (RightHeight - LeftHeight > 0)
                 {
                     return BalanceState.RightHeavy;
                 }

@@ -9,6 +9,16 @@ namespace Task1.Students
     public class Student : IStudent, IComparable
     {
         /// <summary>
+        /// The field stores for min assessment.
+        /// </summary>
+        private const int _minAssessment = 0;
+
+        /// <summary>
+        /// The field stores for max assessment.
+        /// </summary>
+        private const int _maxAssessment = 10;
+
+        /// <summary>
         /// The field stores the test assessment.
         /// </summary>
         private int assessment;
@@ -50,7 +60,7 @@ namespace Task1.Students
             get => assessment;
             set
             {
-                if (value >= 0 && value <= 10)
+                if (value >= _minAssessment && value <= _maxAssessment)
                     assessment = value;
                 else
                     throw new ArgumentException("Invalid assessment.");

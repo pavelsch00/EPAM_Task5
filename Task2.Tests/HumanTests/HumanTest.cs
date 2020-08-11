@@ -3,8 +3,18 @@ using Xunit;
 
 namespace Task2.Tests.HumanTests
 {
+    /// <summary>
+    /// The class tests the human.
+    /// </summary>
     public class HumanTest
     {
+        /// <summary>
+        /// The method checks the equivalence of two objects.
+        /// </summary>
+        /// <param name="name">Student name.</param>
+        /// <param name="city">City name.</param>
+        /// <param name="country">Country of the test.</param>
+        /// <param name="areEqual">Turns the case on or off.</param>
         [Theory]
         [InlineData("Pavel", "Belarus", "Gomel", true)]
         [InlineData("Misha", "Russia", "Moscow", false)]
@@ -23,14 +33,21 @@ namespace Task2.Tests.HumanTests
             //assert
             if (areEqual)
             {
-                Assert.Equal(expected, actual);
+                Assert.True(expected.Equals(actual));
             }
             else
             {
-                Assert.NotEqual(expected, actual);
+                Assert.False(expected.Equals(actual));
             }
         }
 
+        /// <summary>
+        /// The method checks the receipt of the hash code.
+        /// </summary>
+        /// <param name="name">Student name.</param>
+        /// <param name="city">City name.</param>
+        /// <param name="country">Country of the test.</param>
+        /// <param name="areEqual">Turns the case on or off.</param>
         [Theory]
         [InlineData("Pavel", "Belarus", "Gomel", true)]
         [InlineData("Misha", "Russia", "Moscow", false)]
@@ -57,6 +74,13 @@ namespace Task2.Tests.HumanTests
             }
         }
 
+        /// <summary>
+        /// The method checks the ToString method.
+        /// </summary>
+        /// <param name="name">Student name.</param>
+        /// <param name="city">City name.</param>
+        /// <param name="country">Country of the test.</param>
+        /// <param name="areEqual">Turns the case on or off.</param>
         [Theory]
         [InlineData("Pavel", "Belarus", "Gomel", true)]
         [InlineData("Misha", "Russia", "Moscow", false)]

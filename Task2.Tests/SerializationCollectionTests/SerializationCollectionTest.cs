@@ -5,17 +5,24 @@ using Task2.SerializationCollections;
 
 namespace Task2.Tests.SerializationCollectionTests
 {
+    /// <summary>
+    /// The class tests the SerializationCollection.
+    /// </summary>
     public class SerializationCollectionTest
     {
+        /// <summary>
+        /// The method checks serialization and deserialization collection from/to binary file.
+        /// </summary>
+        /// <param name="areEqual">Turns the case on or off.</param>
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void SerializationAndDeserializationCollectionBinaryFile(bool areEuqal)
+        public void SerializationAndDeserializationCollectionBinaryFile(bool areEqual)
         {
             // arrange
             var actual = new List<Human>();
 
-            if (areEuqal)
+            if (areEqual)
             {
                 actual = new List<Human>
                 {
@@ -38,15 +45,19 @@ namespace Task2.Tests.SerializationCollectionTests
             Assert.Equal(expected, actual);
         }
 
+        /// <summary>
+        /// The method checks serialization and deserialization from/to binary file.
+        /// </summary>
+        /// <param name="areEqual">Turns the case on or off.</param>
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void SerializationAndDeserializationBinaryFile(bool areEuqal)
+        public void SerializationAndDeserializationBinaryFile(bool areEqual)
         {
             // arrange
             var actual = new Human();
 
-            if (areEuqal)
+            if (areEqual)
             {
                 actual = new Human("Pavel", "Belarus", "Gomel");
             }
@@ -60,15 +71,19 @@ namespace Task2.Tests.SerializationCollectionTests
             Assert.Equal(expected, actual);
         }
 
+        /// <summary>
+        /// The method checks serialization and deserialization collection from/to json file.
+        /// </summary>
+        /// <param name="areEqual">Turns the case on or off.</param>
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void SerializationAndDeserializationCollectionJsonFile(bool areEuqal)
+        public void SerializationAndDeserializationCollectionJsonFile(bool areEqual)
         {
             // arrange
             var actual = new List<Human>();
 
-            if (areEuqal)
+            if (areEqual)
             {
                 actual = new List<Human>
                 {
@@ -89,15 +104,19 @@ namespace Task2.Tests.SerializationCollectionTests
             Assert.Equal(expected, actual);
         }
 
+        /// <summary>
+        /// The method checks serialization and deserialization from/to json file.
+        /// </summary>
+        /// <param name="areEqual">Turns the case on or off.</param>
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void SerializationAndDeserializationJsonFile(bool areEuqal)
+        public void SerializationAndDeserializationJsonFile(bool areEqual)
         {
             // arrange
             var actual = new Human();
 
-            if (areEuqal)
+            if (areEqual)
             {
                 actual = new Human("Pavel", "Belarus", "Gomel");
             }
@@ -111,15 +130,19 @@ namespace Task2.Tests.SerializationCollectionTests
             Assert.Equal(expected, actual);
         }
 
+        /// <summary>
+        /// The method checks serialization and deserialization collection from/to xml file.
+        /// </summary>
+        /// <param name="areEqual">Turns the case on or off.</param>
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void SerializationAndDeserializationCollectionXmlFile(bool areEuqal)
+        public void SerializationAndDeserializationCollectionXmlFile(bool areEqual)
         {
             // arrange
             var actual = new List<Human>();
 
-            if (areEuqal)
+            if (areEqual)
             {
                 actual = new List<Human>
                 {
@@ -142,15 +165,19 @@ namespace Task2.Tests.SerializationCollectionTests
             Assert.Equal(expected, actual);
         }
 
+        /// <summary>
+        /// The method checks serialization and deserialization from/to xml file.
+        /// </summary>
+        /// <param name="areEqual">Turns the case on or off.</param>
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void SerializationAndDeserializationXmlFile(bool areEuqal)
+        public void SerializationAndDeserializationXmlFile(bool areEqual)
         {
             // arrange
             var actual = new Human();
 
-            if (areEuqal)
+            if (areEqual)
             {
                 actual = new Human("Pavel", "Belarus", "Gomel");
             }

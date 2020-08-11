@@ -154,7 +154,7 @@ namespace Task1.BinaryTree
         /// <summary>
         /// Method removes an element from the tree.
         /// </summary>
-        /// <param name="collection">Collection of objects<T></param>
+        /// <param name="collection">Collection of objects<T>.</param>
         /// <returns>True if deletion happened, false if not.</returns>
         public bool Remove(T collection)
         {
@@ -287,6 +287,7 @@ namespace Task1.BinaryTree
         /// <summary>
         /// Method saves objects to xml file.
         /// </summary>
+        /// <param name="path">Path to file<T>.</param>
         public void SaveToXmlFile(string path)
         {
             var collection = new List<T>();
@@ -303,6 +304,7 @@ namespace Task1.BinaryTree
         /// <summary>
         /// Method get objects from xml file.
         /// </summary>
+        /// <param name="path">Path to file<T>.</param>
         public void GetFromXmlFile(string path)
         {
             try

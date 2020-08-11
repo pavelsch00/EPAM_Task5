@@ -8,15 +8,29 @@ using System.Text;
 
 namespace Task2.SerializationCollections.FileExtensions
 {
+    /// <summary>
+    /// The class serialization any collections class.
+    /// </summary>
     public class FileExtension<T>
     {
+        /// <summary>
+        /// The property stores start pozition for file.
+        /// </summary>
+        private const int _startPozition = 0;
+
+        /// <summary>
+        /// Method save collection to xml file.
+        /// </summary>
+        /// <param name="path">Path to file.</param>
+        /// <param name="collection">Collection<T>.</param>
+        /// <param name="actualClassVersion">Actual version class.</param>
         protected static void SaveToXmlFile(string path, ICollection<T> collection, string actualClassVersion)
         {
             byte[] buffer = Encoding.UTF8.GetBytes("Class version: " + actualClassVersion + "\n");
             try
             {
                 using var fileStream = new FileStream(path, FileMode.Create);
-                fileStream.Write(buffer, 0, buffer.Length);
+                fileStream.Write(buffer, _startPozition, buffer.Length);
                 var formatter = new XmlSerializer(typeof(List<T>));
                 formatter.Serialize(fileStream, collection);
             }
@@ -26,6 +40,12 @@ namespace Task2.SerializationCollections.FileExtensions
             }
         }
 
+        /// <summary>
+        /// Method get collection from xml file.
+        /// </summary>
+        /// <param name="path">Path to file.</param>
+        /// <param name="actualClassVersion">Actual version class.</param>
+        /// <returns>Collection<T>.</returns>
         protected static ICollection<T> GetCollectionFromXmlFile(string path, string actualClassVersion)
         {
             string classVersion = "Class version: " + actualClassVersion + "\n";
@@ -35,7 +55,7 @@ namespace Task2.SerializationCollections.FileExtensions
                 using var fileStream = new FileStream(path, FileMode.OpenOrCreate);
 
                 var destinationArray = new byte[buffer.Length];
-                fileStream.Read(destinationArray, 0, destinationArray.Length);
+                fileStream.Read(destinationArray, _startPozition, destinationArray.Length);
                 string message = Encoding.UTF8.GetString(destinationArray);
                 if(message != classVersion)
                 {
@@ -51,6 +71,12 @@ namespace Task2.SerializationCollections.FileExtensions
             }
         }
 
+        /// <summary>
+        /// Method save collection to json file.
+        /// </summary>
+        /// <param name="path">Path to file.</param>
+        /// <param name="collection">Collection<T>.</param>
+        /// <param name="actualClassVersion">Actual version class.</param>
         protected static void SaveToJsonFile(string path, ICollection<T> collection, string actualClassVersion)
         {
             string classVersion = "Class version: " + actualClassVersion + "\n";
@@ -66,6 +92,12 @@ namespace Task2.SerializationCollections.FileExtensions
             }
         }
 
+        /// <summary>
+        /// Method get collection from json file.
+        /// </summary>
+        /// <param name="path">Path to file.</param>
+        /// <param name="actualClassVersion">Actual version class.</param>
+        /// <returns>Collection<T>.</returns>
         protected static ICollection<T> GetCollectionFromJsonFile(string path, string actualClassVersion)
         {
             string classVersion = "Class version: " + actualClassVersion;
@@ -85,6 +117,12 @@ namespace Task2.SerializationCollections.FileExtensions
             } 
         }
 
+        /// <summary>
+        /// Method save item to binary file.
+        /// </summary>
+        /// <param name="path">Path to file.</param>
+        /// <param name="collection">Collection<T>.</param>
+        /// <param name="actualClassVersion">Actual version class.</param>
         protected static void SaveToBinaryFile(string path, ICollection<T> collection, string actualClassVersion)
         {
             byte[] buffer = Encoding.UTF8.GetBytes("Class version: " + actualClassVersion + "\n");
@@ -93,7 +131,7 @@ namespace Task2.SerializationCollections.FileExtensions
             {
                 var binaryFormatter = new BinaryFormatter();
                 using var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Write);
-                fileStream.Write(buffer, 0, buffer.Length);
+                fileStream.Write(buffer, _startPozition, buffer.Length);
                 binaryFormatter.Serialize(fileStream, collection);
             }
             catch (Exception)
@@ -102,6 +140,12 @@ namespace Task2.SerializationCollections.FileExtensions
             }
         }
 
+        /// <summary>
+        /// Method get collection from binary file.
+        /// </summary>
+        /// <param name="path">Path to file.</param>
+        /// <param name="actualClassVersion">Actual version class.</param>
+        /// <returns>Collection<T>.</returns>
         protected static ICollection<T> GetCollectionFromBinaryFile(string path, string actualClassVersion)
         {
             string classVersion = "Class version: " + actualClassVersion + "\n";
@@ -113,7 +157,7 @@ namespace Task2.SerializationCollections.FileExtensions
                 using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
 
                 var destinationArray = new byte[buffer.Length];
-                fileStream.Read(destinationArray, 0, destinationArray.Length);
+                fileStream.Read(destinationArray, _startPozition, destinationArray.Length);
                 string message = Encoding.UTF8.GetString(destinationArray);
                 if (message != classVersion)
                 {
@@ -128,13 +172,19 @@ namespace Task2.SerializationCollections.FileExtensions
             }
         }
 
+        /// <summary>
+        /// Method save collection to xml file.
+        /// </summary>
+        /// <param name="path">Path to file.</param>
+        /// <param name="collection">Collection<T>.</param>
+        /// <param name="actualClassVersion">Actual version class.</param>
         protected static void SaveToXmlFile(string path, T item, string actualClassVersion)
         {
             byte[] buffer = Encoding.UTF8.GetBytes("Class version: " + actualClassVersion + "\n");
             try
             {
                 using var fileStream = new FileStream(path, FileMode.Create);
-                fileStream.Write(buffer, 0, buffer.Length);
+                fileStream.Write(buffer, _startPozition, buffer.Length);
                 var formatter = new XmlSerializer(typeof(T));
                 formatter.Serialize(fileStream, item);
             }
@@ -144,6 +194,12 @@ namespace Task2.SerializationCollections.FileExtensions
             }
         }
 
+        /// <summary>
+        /// Method save collection to json file.
+        /// </summary>
+        /// <param name="path">Path to file.</param>
+        /// <param name="collection">Collection<T>.</param>
+        /// <param name="actualClassVersion">Actual version class.</param>
         protected static void SaveToJsonFile(string path, T item, string actualClassVersion)
         {
             string classVersion = "Class version: " + actualClassVersion + "\n";
@@ -159,6 +215,12 @@ namespace Task2.SerializationCollections.FileExtensions
             }
         }
 
+        /// <summary>
+        /// Method save item to binary file.
+        /// </summary>
+        /// <param name="path">Path to file.</param>
+        /// <param name="collection">Collection<T>.</param>
+        /// <param name="actualClassVersion">Actual version class.</param>
         protected static void SaveToBinaryFile(string path, T item, string actualClassVersion)
         {
             byte[] buffer = Encoding.UTF8.GetBytes("Class version: " + actualClassVersion + "\n");
@@ -167,7 +229,7 @@ namespace Task2.SerializationCollections.FileExtensions
             {
                 var binaryFormatter = new BinaryFormatter();
                 using var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Write);
-                fileStream.Write(buffer, 0, buffer.Length);
+                fileStream.Write(buffer, _startPozition, buffer.Length);
                 binaryFormatter.Serialize(fileStream, item);
             }
             catch (Exception)
@@ -176,6 +238,12 @@ namespace Task2.SerializationCollections.FileExtensions
             }
         }
 
+        /// <summary>
+        /// Method get item from binary file.
+        /// </summary>
+        /// <param name="path">Path to file.</param>
+        /// <param name="actualClassVersion">Actual version class.</param>
+        /// <returns>Item<T>.</returns>
         protected static T GetFromBinaryFile(string path, string actualClassVersion)
         {
             string classVersion = "Class version: " + actualClassVersion + "\n";
@@ -187,7 +255,7 @@ namespace Task2.SerializationCollections.FileExtensions
                 using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
 
                 var destinationArray = new byte[buffer.Length];
-                fileStream.Read(destinationArray, 0, destinationArray.Length);
+                fileStream.Read(destinationArray, _startPozition, destinationArray.Length);
                 string message = Encoding.UTF8.GetString(destinationArray);
                 if (message != classVersion)
                 {
@@ -202,6 +270,12 @@ namespace Task2.SerializationCollections.FileExtensions
             }
         }
 
+        /// <summary>
+        /// Method get item from xml file.
+        /// </summary>
+        /// <param name="path">Path to file.</param>
+        /// <param name="actualClassVersion">Actual version class.</param>
+        /// <returns>Item<T>.</returns>
         protected static T GetFromXmlFile(string path, string actualClassVersion)
         {
             string classVersion = "Class version: " + actualClassVersion + "\n";
@@ -211,7 +285,7 @@ namespace Task2.SerializationCollections.FileExtensions
                 using FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate);
 
                 var destinationArray = new byte[buffer.Length];
-                fileStream.Read(destinationArray, 0, destinationArray.Length);
+                fileStream.Read(destinationArray, _startPozition, destinationArray.Length);
                 string message = Encoding.UTF8.GetString(destinationArray);
                 if (message != classVersion)
                 {
@@ -227,6 +301,12 @@ namespace Task2.SerializationCollections.FileExtensions
             }
         }
 
+        /// <summary>
+        /// Method get item from json file.
+        /// </summary>
+        /// <param name="path">Path to file.</param>
+        /// <param name="actualClassVersion">Actual version class.</param>
+        /// <returns>Item<T>.</returns>
         public static T GetFromJsonFile(string path, string actualClassVersion)
         {
             string classVersion = "Class version: " + actualClassVersion;

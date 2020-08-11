@@ -4,14 +4,26 @@ using Task2.SerializationCollections.Attributes;
 
 namespace Task2.Humans
 {
+    /// <summary>
+    /// Class describes the human. Using ISerializable interface, Serializable and VersionAttribute attributes.
+    /// </summary>
     [Serializable]
     [Version(2, 1, 0, 1)]
     public class Human : ISerializable
     {
+        /// <summary>
+        /// An empty constructor is needed for serialization.
+        /// </summary>
         public Human()
         {
         }
 
+        /// <summary>
+        /// The constructor initializes the class object.
+        /// </summary>
+        /// <param name="name">Student name.</param>
+        /// <param name="country">Country.</param>
+        /// <param name="city">City.</param>
         public Human(string name, string country, string city)
         {
             Name = name;
@@ -19,6 +31,11 @@ namespace Task2.Humans
             Country = country;
         }
 
+        /// <summary>
+        /// The constructor is needed for serialization.
+        /// </summary>
+        /// <param name="info">Info.</param>
+        /// <param name="context">Context.</param>
         public Human(SerializationInfo info, StreamingContext context)
         {
             Name = (string)info.GetValue("Name", typeof(string));
@@ -26,12 +43,26 @@ namespace Task2.Humans
             Country = (string)info.GetValue("Country", typeof(string));
         }
 
+        /// <summary>
+        /// Property stores the human's name.
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Property stores the city name.
+        /// </summary>
         public string City { get; set; }
 
+        /// <summary>
+        /// Property stores the country name.
+        /// </summary>
         public string Country { get; set; }
 
+        /// <summary>
+        /// Method is needed for serialization/derialization.
+        /// </summary>
+        /// <param name="info">Info.</param>
+        /// <param name="context">Context.</param>
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Name", Name);
