@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
+using Task2.Attributes;
 
-namespace Task2
+namespace Task2.Humans
 {
     [Serializable]
+    [Version(1, 1, 5, 1)]
     public class Human : ISerializable
     {
         public Human()
