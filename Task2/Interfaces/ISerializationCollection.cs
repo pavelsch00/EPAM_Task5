@@ -11,12 +11,12 @@ namespace Task2.Interfaces
 
         public void GetFromXmlFile(string path);
 
-        public void SaveToJsonile(string path);
+        public void SaveToJsonFile(string path);
 
         public void GetFromJsonFile(string path);
 
-        public void SaveToBinaryFilelFile(string path);
+        public void SaveToBinaryFile(string path);
 
-        public void GetFromBinaryFileFile(string path);
+        public void GetFromBinaryFile(string path);
     }
 }

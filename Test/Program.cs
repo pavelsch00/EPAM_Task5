@@ -23,7 +23,15 @@ namespace Test
 
             var serialization = new SerializationCollection<Human>(human);
 
-            serialization.SaveToXmlFile(@"..\..\..\Test4.xml");
+            // serialization.SaveToBinaryFile(@"..\..\..\Test4.bin");
+            // serialization.GetFromBinaryFile(@"..\..\..\Test4.bin");
+
+            // serialization.SaveToJsonFile(@"..\..\..\Test4.json");
+            // serialization.GetFromJsonFile(@"..\..\..\Test4.json");
+
+            // serialization.SaveToXmlFile(@"..\..\..\Test4.xml");
+            serialization.GetFromXmlFile(@"..\..\..\Test4.xml");
+
             foreach (var item in serialization)
             {
                 Console.WriteLine(item);

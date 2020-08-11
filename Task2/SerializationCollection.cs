@@ -8,7 +8,7 @@ namespace Task2
 {
     public class SerializationCollection<T> : ISerializationCollection, IEnumerable<T> where T : ISerializable
     {
-        public SerializationCollection(List<T> collection)
+        public SerializationCollection(IEnumerable<T> collection)
         {
             Collection = collection;
         }
@@ -20,25 +20,19 @@ namespace Task2
         /// <summary>
         /// The property describes the content of the SerializationCollection.
         /// </summary>
-        public List<T> Collection { get; set; }
+        public IEnumerable<T> Collection { get; set; }
 
-        public void GetFromBinaryFileFile(string path)
-        {
-        }
+        public void GetFromBinaryFile(string path) => Collection = FileExtension<T>.GetFromBinaryFile(path);
 
-        public void GetFromJsonFile(string path)
-        {
-        }
+        public void GetFromJsonFile(string path) => Collection = FileExtension<T>.GetFromJsonFile(path);
 
-        public void SaveToXmlFile(string path) => FileExtension<T>.SaveToFile(path, Collection);
+        public void SaveToXmlFile(string path) => FileExtension<T>.SaveToXmlFile(path, Collection);
 
-        public void GetFromXmlFile(string path) => Collection = FileExtension<T>.GetFromFile(path);
+        public void GetFromXmlFile(string path) => Collection = FileExtension<T>.GetFromXmlFile(path);
 
-        public void SaveToBinaryFilelFile(string path)
-        {}
+        public void SaveToBinaryFile(string path) => FileExtension<T>.SaveToBinaryFile(path, Collection);
 
-        public void SaveToJsonile(string path)
-        {}
+        public void SaveToJsonFile(string path) => FileExtension<T>.SaveToJsonFile(path, Collection);
 
         public IEnumerator<T> GetEnumerator()
         {
@@ -47,7 +41,7 @@ namespace Task2
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable<T>)Collection).GetEnumerator();
+            return GetEnumerator();
         }
     }
 }

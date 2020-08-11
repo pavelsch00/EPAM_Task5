@@ -10,12 +10,10 @@ namespace Task2
     {
         public Human()
         {
-            Version = new Version(1, 0, 0, 0);
         }
 
         public Human(string name, string country, string city)
         {
-            Version = new Version(1, 0, 0, 0);
             Name = name;
             City = city;
             Country = country;
@@ -23,13 +21,10 @@ namespace Task2
 
         public Human(SerializationInfo info, StreamingContext context)
         {
-            Version = (Version)info.GetValue("Version", typeof(Version));
-            Name = (string)info.GetValue("Length", typeof(string));
-            City = (string)info.GetValue("hasFurniture", typeof(string));
-            Country = (string)info.GetValue("hasFurniture", typeof(string));
+            Name = (string)info.GetValue("Name", typeof(string));
+            City = (string)info.GetValue("City", typeof(string));
+            Country = (string)info.GetValue("Country", typeof(string));
         }
-
-        public Version Version { get; set; }
 
         public string Name { get; set; }
 
@@ -39,12 +34,11 @@ namespace Task2
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("Version", Version);
             info.AddValue("Name", Name);
             info.AddValue("City", City);
             info.AddValue("Country", Country);
         }
 
-        public override string ToString() => $"Version: {Version}, Name: {Name}, City: {City}, Country: {Country}";
+        public override string ToString() => $"Name: {Name}, City: {City}, Country: {Country}";
     }
 }
