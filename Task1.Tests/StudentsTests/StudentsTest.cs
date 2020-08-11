@@ -15,18 +15,18 @@ namespace Task1.Tests
         /// <param name="testName">Test name.</param>
         /// <param name="testDate">Date of the test.</param>
         /// <param name="assessment">Test assessment.</param>
-        /// <param name="areEquale">Turns the case on or off.</param>
+        /// <param name="areEqual">Turns the case on or off.</param>
         [Theory]
         [InlineData("Pavel", "MMA", "18.02.2020", 10, true)]
         [InlineData("Maxim", "MMA", "18.02.2020", 8, false)]
-        public void Equal(string name, string testName, string testDate, int assessment,bool areEquale)
+        public void Equal(string name, string testName, string testDate, int assessment,bool areEqual)
         {
             // arrange
             var actual = new Student("Pavel", "MMA", "18.02.2020", 10);
             var expected = new Student(name, testName, testDate, assessment);
 
             //assert
-            if (areEquale)
+            if (areEqual)
             {
                 Assert.True(expected.Equals(actual));
             }else
@@ -42,18 +42,18 @@ namespace Task1.Tests
         /// <param name="testName">Test name.</param>
         /// <param name="testDate">Date of the test.</param>
         /// <param name="assessment">Test assessment.</param>
-        /// <param name="areEquale">Turns the case on or off.</param>
+        /// <param name="areEqual">Turns the case on or off.</param>
         [Theory]
         [InlineData("Pavel", "MMA", "18.02.2020", 10, true)]
         [InlineData("Maxim", "MMA", "18.02.2020", 8, false)]
-        public void GetHashCodeTest(string name, string testName, string testDate, int assessment, bool areEquale)
+        public void GetHashCodeTest(string name, string testName, string testDate, int assessment, bool areEqual)
         {
             // arrange
             var actual = new Student("Pavel", "MMA", "18.02.2020", 10);
             var expected = new Student(name, testName, testDate, assessment);
 
             //assert
-            if (areEquale)
+            if (areEqual)
             {
                 Assert.Equal(expected.GetHashCode(), actual.GetHashCode());
             }

@@ -6,16 +6,16 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 using System.Text;
 
-namespace Task2.FileExtensions
+namespace Task2.SerializationCollections.FileExtensions
 {
-    public static class FileExtension<T>
+    public class FileExtension<T>
     {
-        public static void SaveToXmlFile(string path, ICollection<T> collection, string actualClassVersion)
+        protected static void SaveToXmlFile(string path, ICollection<T> collection, string actualClassVersion)
         {
             byte[] buffer = Encoding.UTF8.GetBytes("Class version: " + actualClassVersion + "\n");
             try
             {
-                using var fileStream = new FileStream(path, FileMode.OpenOrCreate);
+                using var fileStream = new FileStream(path, FileMode.Create);
                 fileStream.Write(buffer, 0, buffer.Length);
                 var formatter = new XmlSerializer(typeof(List<T>));
                 formatter.Serialize(fileStream, collection);
@@ -26,7 +26,7 @@ namespace Task2.FileExtensions
             }
         }
 
-        public static ICollection<T> GetCollectionFromXmlFile(string path, string actualClassVersion)
+        protected static ICollection<T> GetCollectionFromXmlFile(string path, string actualClassVersion)
         {
             string classVersion = "Class version: " + actualClassVersion + "\n";
             byte[] buffer = Encoding.UTF8.GetBytes(classVersion);
@@ -51,7 +51,7 @@ namespace Task2.FileExtensions
             }
         }
 
-        public static void SaveToJsonFile(string path, ICollection<T> collection, string actualClassVersion)
+        protected static void SaveToJsonFile(string path, ICollection<T> collection, string actualClassVersion)
         {
             string classVersion = "Class version: " + actualClassVersion + "\n";
             try
@@ -66,7 +66,7 @@ namespace Task2.FileExtensions
             }
         }
 
-        public static ICollection<T> GetCollectionFromJsonFile(string path, string actualClassVersion)
+        protected static ICollection<T> GetCollectionFromJsonFile(string path, string actualClassVersion)
         {
             string classVersion = "Class version: " + actualClassVersion;
             try
@@ -85,7 +85,7 @@ namespace Task2.FileExtensions
             } 
         }
 
-        public static void SaveToBinaryFile(string path, ICollection<T> collection, string actualClassVersion)
+        protected static void SaveToBinaryFile(string path, ICollection<T> collection, string actualClassVersion)
         {
             byte[] buffer = Encoding.UTF8.GetBytes("Class version: " + actualClassVersion + "\n");
 
@@ -102,7 +102,7 @@ namespace Task2.FileExtensions
             }
         }
 
-        public static ICollection<T> GetCollectionFromBinaryFile(string path, string actualClassVersion)
+        protected static ICollection<T> GetCollectionFromBinaryFile(string path, string actualClassVersion)
         {
             string classVersion = "Class version: " + actualClassVersion + "\n";
             byte[] buffer = Encoding.UTF8.GetBytes(classVersion);
@@ -128,12 +128,12 @@ namespace Task2.FileExtensions
             }
         }
 
-        public static void SaveToXmlFile(string path, T item, string actualClassVersion)
+        protected static void SaveToXmlFile(string path, T item, string actualClassVersion)
         {
             byte[] buffer = Encoding.UTF8.GetBytes("Class version: " + actualClassVersion + "\n");
             try
             {
-                using var fileStream = new FileStream(path, FileMode.OpenOrCreate);
+                using var fileStream = new FileStream(path, FileMode.Create);
                 fileStream.Write(buffer, 0, buffer.Length);
                 var formatter = new XmlSerializer(typeof(T));
                 formatter.Serialize(fileStream, item);
@@ -144,7 +144,7 @@ namespace Task2.FileExtensions
             }
         }
 
-        public static void SaveToJsonFile(string path, T item, string actualClassVersion)
+        protected static void SaveToJsonFile(string path, T item, string actualClassVersion)
         {
             string classVersion = "Class version: " + actualClassVersion + "\n";
             try
@@ -159,7 +159,7 @@ namespace Task2.FileExtensions
             }
         }
 
-        public static void SaveToBinaryFile(string path, T item, string actualClassVersion)
+        protected static void SaveToBinaryFile(string path, T item, string actualClassVersion)
         {
             byte[] buffer = Encoding.UTF8.GetBytes("Class version: " + actualClassVersion + "\n");
 
@@ -176,7 +176,7 @@ namespace Task2.FileExtensions
             }
         }
 
-        public static T GetFromBinaryFile(string path, string actualClassVersion)
+        protected static T GetFromBinaryFile(string path, string actualClassVersion)
         {
             string classVersion = "Class version: " + actualClassVersion + "\n";
             byte[] buffer = Encoding.UTF8.GetBytes(classVersion);
@@ -202,7 +202,7 @@ namespace Task2.FileExtensions
             }
         }
 
-        public static T GetFromXmlFile(string path, string actualClassVersion)
+        protected static T GetFromXmlFile(string path, string actualClassVersion)
         {
             string classVersion = "Class version: " + actualClassVersion + "\n";
             byte[] buffer = Encoding.UTF8.GetBytes(classVersion);

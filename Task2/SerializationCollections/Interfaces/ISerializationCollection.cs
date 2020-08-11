@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
-namespace Task2.Interfaces
+namespace Task2.SerializationCollections.Interfaces
 {
-    interface ISerializationCollection<T>
+    interface ISerializationCollection<T> where T : ISerializable
     {
         public ICollection<T> GetCollectionFromBinaryFile(string path);
 

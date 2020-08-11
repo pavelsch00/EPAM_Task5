@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Task2.Attributes;
+using Task2.SerializationCollections.Attributes;
 
 namespace Task2.Humans
 {
     [Serializable]
-    [Version(1, 1, 5, 1)]
+    [Version(2, 1, 0, 1)]
     public class Human : ISerializable
     {
         public Human()
@@ -39,6 +39,33 @@ namespace Task2.Humans
             info.AddValue("Country", Country);
         }
 
+        /// <summary>
+        /// Method equals two objects.
+        /// </summary>
+        /// <param name="obj">Equals object.</param>
+        /// <returns>Returns the result of the comparison</returns>
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != GetType())
+                return false;
+
+            Human human = (Human)obj;
+
+            return Name == human.Name &&
+                   City == human.City &&
+                   Country == human.Country;
+        }
+
+        /// <summary>
+        /// The method gets the hash code of the object.
+        /// </summary>
+        /// <returns>Returns the hash code of the object.</returns>
+        public override int GetHashCode() => HashCode.Combine(Name, City, Country);
+
+        /// <summary>
+        /// The method returns information about the object in string form.
+        /// </summary>
+        /// <returns>Information about the object.</returns>
         public override string ToString() => $"Name: {Name}, City: {City}, Country: {Country}";
     }
 }

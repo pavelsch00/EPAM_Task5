@@ -83,9 +83,10 @@ namespace Task1.Tests
         public void IsContains(string name, string testName, string testDate, int assessment, bool actual)
         {
             // arrange
-            var collection = new BinaryTree<Student>();
-
-            collection.Add(new Student("Pavel", "MMA", "18.02.2020", 10));
+            var collection = new BinaryTree<Student>
+            {
+                new Student("Pavel", "MMA", "18.02.2020", 10)
+            };
 
             //act
             bool expected = collection.IsContains(new Student(name, testName, testDate, assessment));
@@ -97,11 +98,11 @@ namespace Task1.Tests
         /// <summary>
         /// The method checks to remove all elements from the tree.
         /// </summary>
-        /// <param name="areEquale">Turns the case on or off.</param>
+        /// <param name="areEqual">Turns the case on or off.</param>
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void Clear(bool areEquale)
+        public void Clear(bool areEqual)
         {
             // arrange
             var expected = new BinaryTree<Student>
@@ -113,13 +114,13 @@ namespace Task1.Tests
             var actual = new BinaryTree<Student>();
 
             //act
-            if (areEquale)
+            if (areEqual)
             {
                 expected.Clear();
             }
 
             //assert
-            if (areEquale)
+            if (areEqual)
             {
                 Assert.Equal(expected, actual);
             }
@@ -133,11 +134,11 @@ namespace Task1.Tests
         /// The method checks for reading from a file.
         /// </summary>
         /// <param name="path">File path.</param>
-        /// <param name="areEquale">Turns the case on or off.</param>
+        /// <param name="areEqual">Turns the case on or off.</param>
         [Theory]
         [InlineData(@"..\..\..\BinaryTreeTests\Resources\Test1.xml", true)]
         [InlineData(@"..\..\..\BinaryTreeTests\Resources\Test2.xml", false)]
-        public void GetFromXmlFile(string path, bool areEquale)
+        public void GetFromXmlFile(string path, bool areEqual)
         {
             // arrange
             var expected = new BinaryTree<Student>();
@@ -155,7 +156,7 @@ namespace Task1.Tests
             actual.Add(new Student("Daniil", "MMA", "18.02.2020", 0));
 
             //assert
-            if (areEquale)
+            if (areEqual)
             {
                 Assert.Equal(expected, actual);
             }
@@ -175,12 +176,13 @@ namespace Task1.Tests
         {
             // arrange
             var expected = new BinaryTree<Student>();
-            var actual = new BinaryTree<Student>();
-
-            actual.Add(new Student("Pavel", "MMA", "18.02.2020", 10));
-            actual.Add(new Student("Maxim", "TViMS", "18.02.2020", 2));
-            actual.Add(new Student("Rita", "MMA", "18.02.2020", 3));
-            actual.Add(new Student("Sasha", "TViMS", "18.02.2020", 5));
+            var actual = new BinaryTree<Student>
+            {
+                new Student("Pavel", "MMA", "18.02.2020", 10),
+                new Student("Maxim", "TViMS", "18.02.2020", 2),
+                new Student("Rita", "MMA", "18.02.2020", 3),
+                new Student("Sasha", "TViMS", "18.02.2020", 5)
+            };
 
             // act
             actual.SaveToXmlFile(path);
@@ -199,11 +201,11 @@ namespace Task1.Tests
         /// <param name="testName">Test name.</param>
         /// <param name="testDate">Date of the test.</param>
         /// <param name="assessment">Test assessment.</param>
-        /// <param name="areEquale">Turns the case on or off.</param>
+        /// <param name="areEqual">Turns the case on or off.</param>
         [Theory]
         [InlineData("Pavel", "MMA", "18.02.2020", 10, true)]
         [InlineData("Maxim", "MMA", "18.02.2020", 8, false)]
-        public void Equal(string name, string testName, string testDate, int assessment,bool areEquale)
+        public void Equal(string name, string testName, string testDate, int assessment,bool areEqual)
         {
             // arrange
             var actual = new BinaryTree<Student>
@@ -220,13 +222,13 @@ namespace Task1.Tests
             };
             //act
 
-            if (areEquale)
+            if (areEqual)
             {
                 expected.Add(new Student(name, testName, testDate, assessment));
             }
 
             //assert
-            if (areEquale)
+            if (areEqual)
             {
                 Assert.True(expected.Equals(actual));
             }else
@@ -242,11 +244,11 @@ namespace Task1.Tests
         /// <param name="testName">Test name.</param>
         /// <param name="testDate">Date of the test.</param>
         /// <param name="assessment">Test assessment.</param>
-        /// <param name="areEquale">Turns the case on or off.</param>
+        /// <param name="areEqual">Turns the case on or off.</param>
         [Theory]
         [InlineData("Pavel", "MMA", "18.02.2020", 10, true)]
         [InlineData("Maxim", "MMA", "18.02.2020", 8, false)]
-        public void GetHashCodeTest(string name, string testName, string testDate, int assessment, bool areEquale)
+        public void GetHashCodeTest(string name, string testName, string testDate, int assessment, bool areEqual)
         {
             // arrange
             var actual = new BinaryTree<Student>
@@ -263,13 +265,13 @@ namespace Task1.Tests
             };
 
             //act
-            if (areEquale)
+            if (areEqual)
             {
                 expected.Add(new Student(name, testName, testDate, assessment));
             }
 
             //assert
-            if (areEquale)
+            if (areEqual)
             {
                 Assert.Equal(expected.GetHashCode(), actual.GetHashCode());
             }
