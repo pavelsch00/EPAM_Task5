@@ -6,42 +6,30 @@ using Task2.Interfaces;
 
 namespace Task2
 {
-    public class SerializationCollection<T> : ISerializationCollection, IEnumerable<T> where T : ISerializable
+    public class SerializationCollection<T> : ISerializationCollection<T> where T : ISerializable
     {
-        public SerializationCollection(IEnumerable<T> collection)
-        {
-            Collection = collection;
-        }
+        public ICollection<T> GetCollectionFromBinaryFile(string path) => FileExtension<T>.GetCollectionFromBinaryFile(path);
 
-        public SerializationCollection()
-        {
-        }
+        public void SaveToBinaryFile(string path, ICollection<T> collection) => FileExtension<T>.SaveToBinaryFile(path, collection);
 
-        /// <summary>
-        /// The property describes the content of the SerializationCollection.
-        /// </summary>
-        public IEnumerable<T> Collection { get; set; }
+        public ICollection<T> GetCollectionFromJsonFile(string path) => FileExtension<T>.GetCollectionFromJsonFile(path);
 
-        public void GetFromBinaryFile(string path) => Collection = FileExtension<T>.GetFromBinaryFile(path);
+        public void SaveToJsonFile(string path, ICollection<T> collection) => FileExtension<T>.SaveToJsonFile(path, collection);
 
-        public void GetFromJsonFile(string path) => Collection = FileExtension<T>.GetFromJsonFile(path);
+        public ICollection<T> GetCollectionFromXmlFile(string path) => FileExtension<T>.GetCollectionFromXmlFile(path);
 
-        public void SaveToXmlFile(string path) => FileExtension<T>.SaveToXmlFile(path, Collection);
+        public void SaveToXmlFile(string path, ICollection<T> collection) => FileExtension<T>.SaveToXmlFile(path, collection);
 
-        public void GetFromXmlFile(string path) => Collection = FileExtension<T>.GetFromXmlFile(path);
+        public T GetFromBinaryFile(string path) => FileExtension<T>.GetFromBinaryFile(path);
 
-        public void SaveToBinaryFile(string path) => FileExtension<T>.SaveToBinaryFile(path, Collection);
+        public void SaveToBinaryFile(string path, T collection) => FileExtension<T>.SaveToBinaryFile(path, collection);
 
-        public void SaveToJsonFile(string path) => FileExtension<T>.SaveToJsonFile(path, Collection);
+        public T GetFromJsonFile(string path) => FileExtension<T>.GetFromJsonFile(path);
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            return Collection.GetEnumerator();
-        }
+        public void SaveToXmlFile(string path, T collection) => FileExtension<T>.SaveToXmlFile(path, collection);
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        public void SaveToJsonFile(string path, T collection) => FileExtension<T>.SaveToJsonFile(path, collection);
+
+        public T GetFromXmlFile(string path) => FileExtension<T>.GetFromXmlFile(path);
     }
 }

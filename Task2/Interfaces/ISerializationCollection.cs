@@ -5,18 +5,24 @@ using System.Text;
 
 namespace Task2.Interfaces
 {
-    interface ISerializationCollection
+    interface ISerializationCollection<T>
     {
-        public void SaveToXmlFile(string path);
+        public ICollection<T> GetCollectionFromBinaryFile(string path);
 
-        public void GetFromXmlFile(string path);
+        public ICollection<T> GetCollectionFromJsonFile(string path);
 
-        public void SaveToJsonFile(string path);
+        public ICollection<T> GetCollectionFromXmlFile(string path);
 
-        public void GetFromJsonFile(string path);
+        public void SaveToXmlFile(string path, ICollection<T> collection);
 
-        public void SaveToBinaryFile(string path);
+        public T GetFromXmlFile(string path);
 
-        public void GetFromBinaryFile(string path);
+        public void SaveToJsonFile(string path, ICollection<T> collection);
+
+        public T GetFromJsonFile(string path);
+
+        public void SaveToBinaryFile(string path, ICollection<T> collection);
+
+        public T GetFromBinaryFile(string path);
     }
 }

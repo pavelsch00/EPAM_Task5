@@ -13,7 +13,7 @@ namespace Test
             temp.Add(2);
             temp.Add(34);
 
-
+            // var testHuman = new List<Human>();
             var human = new List<Human>();
             human.Add(new Human("Pavel", "Belarus", "Gomel"));
             human.Add(new Human("Maxim", "Belarus", "Minsk"));
@@ -21,18 +21,19 @@ namespace Test
             human.Add(new Human("Rita", "Belarus", "Gomel"));
             human.Add(new Human("Kolya", "Belarus", "Grodno"));
 
-            var serialization = new SerializationCollection<Human>(human);
+            var serialization = new SerializationCollection<Human>();
 
-            // serialization.SaveToBinaryFile(@"..\..\..\Test4.bin");
-            // serialization.GetFromBinaryFile(@"..\..\..\Test4.bin");
+            // serialization.SaveToBinaryFile(@"..\..\..\Test4.bin", human);
+            // var testHuman = serialization.GetFromBinaryFile(@"..\..\..\Test4.bin");
 
-            // serialization.SaveToJsonFile(@"..\..\..\Test4.json");
-            // serialization.GetFromJsonFile(@"..\..\..\Test4.json");
+            serialization.SaveToJsonFile(@"..\..\..\Test4.json", human);
+            var testHuman = serialization.GetCollectionFromJsonFile(@"..\..\..\Test4.json");
 
-            // serialization.SaveToXmlFile(@"..\..\..\Test4.xml");
-            serialization.GetFromXmlFile(@"..\..\..\Test4.xml");
-
-            foreach (var item in serialization)
+            // serialization.SaveToXmlFile(@"..\..\..\Test4.xml", human);
+            // var testHuman = serialization.GetFromXmlFile(@"..\..\..\Test4.xml");
+            // Console.WriteLine(testHuman);
+            
+            foreach (var item in testHuman)
             {
                 Console.WriteLine(item);
             }
